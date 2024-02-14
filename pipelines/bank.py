@@ -67,9 +67,9 @@ class BankPipeline:
                                     "transactions_table.day")
 
         final_df = final_df.withColumn("date_id", concat_ws("-", "year", "month", "day")) \
-                           .drop('year', 'month', 'day')
+            .drop('year', 'month', 'day')
 
-        final_df.show(20,0)
+        final_df.show(20, 0)
 
         # Write the joined DataFrame to the output path
         output_path = etl_config["output"]["path"]
@@ -80,8 +80,6 @@ class BankPipeline:
             .partitionBy('date_id') \
             .save(output_path)
 
-        self.spark.stop()
-
 
 if __name__ == '__main__':
     config_feed = "../config/bank.json"
@@ -89,17 +87,18 @@ if __name__ == '__main__':
     # read the raw data from bronze layer
     reader = DataReader(config_feed)
     datasets, config = reader.read_datasets()
-    '''
+
     # write the data to silver layer in parquet format
     writer = DataWriter(datasets, config)
     writer.write_output()
-    '''
+
     '''
     TBD : identify & implement a change detection mechanism 
     1. File based (.in_process file)
     2. Comparing filenames bronze layer with already published/consumed filenames stored in a table. 
     For now : picking data from bronze
     '''
-
+    '''    
     # run etl pipeline
     BankPipeline().implement_etl(config)
+    '''

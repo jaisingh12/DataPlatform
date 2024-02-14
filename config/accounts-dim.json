@@ -1,0 +1,8 @@
+{
+  "source_table": "../datasets/silver/accounts/",
+  "target_table": "../datasets/gold/accounts/",
+  "join_keys": [
+    "account_number"
+  ],
+  "scd_type": "scd1"
+}

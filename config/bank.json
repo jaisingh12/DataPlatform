@@ -50,7 +50,7 @@
     },
     "output": {
       "path": "../datasets/gold/bank/",
-      "format": "parquet"
+      "format": "delta"
     }
   }
 }
