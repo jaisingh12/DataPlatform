@@ -4,7 +4,7 @@ This is an initial draft version of a dynamic data platform leveraging PySpark.
 
 This platform allows for seamless ingestion and ETL processes, driven by configuration-based files for generic data pipelines.
 
-We have followed medallion/"multi-hop" architecture, to incrementally and progressively improve the structure and quality of data as it flows through each layer of the architecture. 
+We have followed medallion/multi-hop architecture, to incrementally and progressively improve the structure and quality of data as it flows through each layer of the architecture. 
 Bronze ⇒ Silver ⇒ Gold layer tables
 
 In our bronze layer, we house raw feeds, from CSV to JSON, allowing ingestion using generic code lines. 
