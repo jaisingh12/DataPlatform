@@ -41,7 +41,7 @@ class SCDHandler:
         new_df = base_df.filter(f"{delta_filter_expr} AND target_df.hash_value IS NULL") \
             .select("source_df.*")
 
-        # Combine result DataFrames
+        # Combine all dfs into result DataFrame
         result_df = new_df.select(tgt_cols). \
             unionByName(updated_df.select(tgt_cols)). \
             unionByName(unchanged_df.select(tgt_cols))
