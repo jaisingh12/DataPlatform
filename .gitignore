@@ -6,6 +6,6 @@ __pycache__/
 setups/
 test/
 zextra/
-datasets/silver/
-datasets/gold
+datasets/silver/*
+datasets/gold/*
 
