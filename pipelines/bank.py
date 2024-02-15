@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
     # write the data to silver layer in parquet format
     writer = DataWriter(datasets, config)
-    writer.write_output()
+    writer.write_silver_output()
 
     '''
     TBD : identify & implement a change detection mechanism 
@@ -98,7 +98,6 @@ if __name__ == '__main__':
     2. Comparing filenames bronze layer with already published/consumed filenames stored in a table. 
     For now : picking data from bronze
     '''
-    '''    
+
     # run etl pipeline
     BankPipeline().implement_etl(config)
-    '''

@@ -1,20 +1,23 @@
 {
   "datasets": {
     "accounts": {
-      "path": "../datasets/bronze/accounts/",
+      "input_path": "../datasets/bronze/accounts/",
+      "output_path": "../datasets/silver/accounts/",
       "format": "csv",
       "header": "true",
       "delimiter": "|",
       "regex": "accounts_\\d{14}.*"
     },
     "customers": {
-      "path": "../datasets/bronze/customers/",
+      "input_path": "../datasets/bronze/customers/",
+      "output_path": "../datasets/silver/customers/",
       "format": "csv",
       "header": "true",
       "regex": "customers_\\d{14}.*"
     },
     "transactions": {
-      "path": "../datasets/bronze/transactions/",
+      "input_path": "../datasets/bronze/transactions/",
+      "output_path": "../datasets/silver/transactions/",
       "format": "json",
       "regex": "transactions_\\d{14}.*"
     }

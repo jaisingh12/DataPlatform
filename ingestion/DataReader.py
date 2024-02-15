@@ -38,12 +38,13 @@ class DataReader:
         # read each dataset data
         for dataset_name, dataset_info in config['datasets'].items():
             data_format = dataset_info.get('format')
-            dataset_path = dataset_info.get('path')
+            dataset_path = dataset_info.get('input_path')
             regex = dataset_info.get("regex")
 
             matching_files = self._get_matching_files(dataset_path, regex)
             if not matching_files:
-                self.logger.info(f"No files found matching the regex {regex} for dataset {dataset_name}")
+                self.logger.info(
+                    f"No files found matching the regex {regex} for dataset {dataset_name} at loc {dataset_path}")
                 continue
 
             dataset_info['matched_files'] = matching_files
@@ -59,7 +60,7 @@ class DataReader:
 
                 # Show the dataset
                 self.logger.info(f"Data loaded into spark dataframe for dataset - {dataset_name}")
-                datasets[dataset_name].show(truncate=False)
+                # datasets[dataset_name].show(truncate=False)
 
             except Exception as e:
                 self.logger.error(f"Error reading dataset '{dataset_name}': {e}")
@@ -70,7 +71,7 @@ class DataReader:
         header = dataset_info.get('header', 'true')  # Default header to 'true' if not provided
         delimiter = dataset_info.get('delimiter', ',')  # Default delimiter to ',' if not provided
         matched_files = dataset_info.get("matched_files")
-        dataset_path = dataset_info.get("path")
+        dataset_path = dataset_info.get("input_path")
 
         for file in matched_files:
             df = self.spark.read.format("csv") \
@@ -82,7 +83,7 @@ class DataReader:
 
     def _read_json(self, dataset_info):
         matched_files = dataset_info.get("matched_files")
-        dataset_path = dataset_info.get("path")
+        dataset_path = dataset_info.get("input_path")
 
         for file in matched_files:
             df = self.spark.read.format("json") \

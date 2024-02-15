@@ -9,7 +9,7 @@ class SCDHandler:
         self.spark = SparkSessionManager(self.__class__.__name__).create_session()
         self.logger = Logger(self.__class__.__name__)
 
-    def scd_1(self, source_df, target_df, join_keys, metadata_cols=['date_id']):
+    def scd_1(self, source_df, target_df, join_keys, metadata_cols=[]):
         # check if all the columns from target df is present in source df
         cols_missing = set([cols for cols in target_df.columns if cols not in source_df.columns])
         if cols_missing:
