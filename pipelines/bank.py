@@ -86,6 +86,7 @@ class BankPipeline:
         # self.logger.info(f"Optimized delta table for path {output_path}")
 
         # self.spark.sql(f"VACCUM delta.`{output_path}`")
+
         # self.logger.info(f"Vaccumed delta table for path {output_path}")
 
 
