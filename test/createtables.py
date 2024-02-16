@@ -1,11 +1,13 @@
 from utils.spark_session import SparkSessionManager
 spark = SparkSessionManager("test").create_session()
 
-#spark.sql("select * from bank_str1").show()
+spark.sql("select * from bank_str1").show()
+
+spark.sql("select * from bank_str2").show()
 
 
 table_ddl = """
-CREATE TABLE bank_str1 (
+CREATE TABLE bank_str2 (
  transaction_id long 
 ,account_number long
 ,amount long
@@ -14,13 +16,13 @@ CREATE TABLE bank_str1 (
 ,name string)
 USING DELTA 
 PARTITIONED BY (date_id string)
-LOCATION 'datasets/gold/bank'
+LOCATION '../datasets/gold/bank'
 """
 
 spark.sql(table_ddl).show()
-spark.sql("select * from bank_str1").show()
+spark.sql("select * from bank_str2").show()
 
-spark.sql("describe extended bank_str1").show(1000,False)
+spark.sql("describe extended bank_str2").show(1000,False)
 spark.catalog.refreshTable("bank_str1")
 
 spark.sql("select * from bank_str1").printSchema()
