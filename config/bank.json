@@ -1,0 +1,59 @@
+{
+  "datasets": {
+    "accounts": {
+      "input_path": "../datasets/bronze/accounts/",
+      "output_path": "../datasets/silver/accounts/",
+      "format": "csv",
+      "header": "true",
+      "delimiter": "|",
+      "regex": "accounts_\\d{14}.*"
+    },
+    "customers": {
+      "input_path": "../datasets/bronze/customers/",
+      "output_path": "../datasets/silver/customers/",
+      "format": "csv",
+      "header": "true",
+      "regex": "customers_\\d{14}.*"
+    },
+    "transactions": {
+      "input_path": "../datasets/bronze/transactions/",
+      "output_path": "../datasets/silver/transactions/",
+      "format": "json",
+      "regex": "transactions_\\d{14}.*"
+    }
+  },
+  "spark_conf": {
+      "spark.driver.memory": "4g",
+      "spark.executor.memory": "2g",
+      "spark.executor.instances": "4",
+      "spark.executor.cores": "2"
+    },
+  "etl": {
+    "join": {
+      "left": "accounts",
+      "right": "transactions",
+      "left_key": "account_number",
+      "right_key": "account_number",
+      "join_type": "left"
+    },
+    "join2": {
+      "left": "accounts",
+      "right": "customers",
+      "left_key": "customer_id",
+      "right_key": "customer_id",
+      "join_type": "inner"
+    },
+    "aggregations": {
+      "total_balance": "sum(accounts_table.balance) as total_balance",
+      "new_accounts_count": "count(distinct accounts_table.account_number) as new_accounts_count",
+      "avg_age": "avg(customers_table.age) as avg_age",
+      "total_transaction_amount": "sum(transactions_table.amount) as total_transaction_amount",
+      "transactions_count": "count(*) as transactions_count",
+      "avg_balance": "avg(accounts_table.balance) as avg_balance"
+    },
+    "output": {
+      "path": "../datasets/gold/bank/",
+      "format": "delta"
+    }
+  }
+}

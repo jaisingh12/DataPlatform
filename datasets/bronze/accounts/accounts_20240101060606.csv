@@ -1,0 +1,4 @@
+account_number|account_type|customer_id|balance|open_date
+1001|Savings Account|1|5000|2022-01-01
+1002|Checking Account|2|3000|2022-01-15
+1003|Investment Account|3|10000|2022-03-20
